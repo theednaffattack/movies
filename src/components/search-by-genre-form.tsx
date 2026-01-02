@@ -1,7 +1,8 @@
 import type { Movie } from "../pages/home";
 import { searchMovies } from "../services/api";
+import { GenreCheckboxes } from "./genre-checkboxes";
 
-export function SearchForm({
+export function SearchByGenreForm({
   setError,
   loading,
   setLoading,
@@ -40,25 +41,10 @@ export function SearchForm({
 
     setSearchQuery({ search: "", category: "All" });
   }
-  function handleCategoryChange(evt: React.ChangeEvent<HTMLSelectElement>) {
-    evt.preventDefault();
-    setSearchQuery({ ...searchQuery, category: evt.target.value });
-  }
+
   return (
     <form onSubmit={handleSearch} className="search-form">
-      <input
-        type="text"
-        placeholder="Search for movies..."
-        className="search-input"
-        value={searchQuery.search}
-        onChange={(evt) =>
-          setSearchQuery({
-            ...searchQuery,
-            search: evt.target.value,
-          })
-        }
-      />
-
+      <GenreCheckboxes />
       <button type="submit" className="search-button">
         Search by Title
       </button>

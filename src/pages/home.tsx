@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { MovieCard } from "../components/movie-card";
+import { MoviesGrid } from "../components/movies-grid";
 import { SearchForm } from "../components/search-form";
 import "../css/home.css";
 import { getPopularMovies } from "../services/api";
+import { SearchByGenreForm } from "../components/search-by-genre-form";
 
 export interface Movie {
   id: number;
@@ -51,7 +52,7 @@ export function Home() {
     loadPopularMovies();
   }, []);
 
-  const poster_url = "https://image.tmdb.org/t/p/w300";
+  // const poster_url = "https://image.tmdb.org/t/p/w300";
 
   return (
     <div className="home">
@@ -63,22 +64,19 @@ export function Home() {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
+      <SearchByGenreForm
+        setLoading={setLoading}
+        loading={loading}
+        setError={setError}
+        setMovies={setMovies}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
       {error && <div className="error-message">{error}</div>}
       {loading ? (
         <div className="loading">loading...</div>
       ) : (
-        <div className="movies-grid">
-          {movies.map(({ id, poster_path, title, release_date }) => {
-            return (
-              <MovieCard
-                url={`${poster_url}${poster_path}`}
-                key={id}
-                title={title}
-                releaseDate={release_date?.split("-")[0]}
-              />
-            );
-          })}
-        </div>
+        <MoviesGrid movies={movies} />
       )}
     </div>
   );
