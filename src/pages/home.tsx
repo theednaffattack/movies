@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { FilterForm } from "../components/filter-form";
 import { MovieCard } from "../components/movie-card";
+import { SearchForm } from "../components/search-form";
 import "../css/home.css";
 import { getPopularMovies } from "../services/api";
-import { SearchForm } from "../components/search-form";
 
 export interface Movie {
   id: number;
@@ -56,7 +55,6 @@ export function Home() {
 
   return (
     <div className="home">
-      <FilterForm searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <SearchForm
         setLoading={setLoading}
         loading={loading}
