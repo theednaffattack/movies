@@ -1,5 +1,5 @@
 import type { Movie } from "../pages/home";
-import { searchMovies } from "../services/api";
+import { searchMoviesByGenre } from "../services/api";
 import { GenreCheckboxes } from "./genre-checkboxes";
 
 export function SearchByGenreForm({
@@ -22,15 +22,16 @@ export function SearchByGenreForm({
   async function handleSearch(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     // If search is blank or all spaces, do not search
-    if (!searchQuery.search.trim()) return;
+    // if (!searchQuery.search.trim() && searchQuery.category == "All") return;
     // If the page is in a loading state, do not search
     if (loading) return;
 
     setLoading(true);
 
     try {
-      const searchResults = await searchMovies(searchQuery.search);
-      setMovies(searchResults);
+      const something = await searchMoviesByGenre(searchQuery.category);
+      //   const searchResults = await searchMovies(searchQuery.search);
+      setMovies(something);
       setError(null);
     } catch (err) {
       console.error(err);

@@ -7,8 +7,8 @@ import { SearchByGenreForm } from "../components/search-by-genre-form";
 
 export interface Movie {
   id: number;
-  category: string;
-  imgUrl: string;
+  // category: string;
+  // imgUrl: string;
   title: string;
   release_date: string;
 
